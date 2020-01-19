@@ -126,4 +126,214 @@
 		}
 	Request (GET)
 		params:
+			cn : cropName
+			fn : farmerNumber
+		Response:
+			{
+				"rating" : 4,
+				"count" : 34
+			}
+/b/crops/availability
+	Request
+		{
+			"farmerNumber" : 901909090113,
+			"cropName" : "onion",
+			"quantity" : 10
+		}
+	Response :
+		{
+			"status" : "available"
+		}
+	Response :
+		{
+			"status" : "unavailable"
+		}
+/b/order
+	Response(GET)
+		{
+			"orders" :
+			[
+				{
+					"orderId" : "adfasd102938",
+					"farmerName" : "Asdf Asdf",
+					"cropName" : "onion",
+					"quantity" : 10,
+					"date" : 2012-04-23T18:25:43.511Z,
+					"paymentStatus" : "done",
+					"deliver" : "done"
+				},
+				{
+					"orderId" : "adfasd102938",
+					"farmerName" : "Asdf Asdf",
+					"cropName" : "onion",
+					"quantity" : 10,
+					"date" : 2012-04-23T18:25:43.511Z,
+					"paymentStatus" : "pending",
+					"deliver" : "pening"
+				},
+			]
+		}
+	Request(POST)
+		{
+			"farmerNumber" : 9090909090,
+			"cropName" : "onion",
+			"quantity" : 10,
+		}
+	Response(200)
+		{
+			"orderId" : "asdfasd839274asd",
+			"status" : "success"
+		}
+	Response(-1)
+		{
+			"status" : "fail",
+			"message" : "Server"
+		}
+/order/payment
+	Request(POST):
+		{
+			"orderId" : "adfjhal12763asd",
+		}
+		Response(200)
+			{
+				"status" : "success"
+			}
+		Response(-1)
+			{
+				"status" : "fail",
+				"message" : "Server Problem"
+			}
+	Response(GET):
+		params:
+			oid : order id
+		{
+			"status" : "done"
+		}
+	Response(GET):
+		{
+			"status" : "pending
 
+
+
+
+
+
+			"
+		}
+/order/deliver
+	Request(POST):
+		{
+			"orderId" : "1231928adsfjhasd"
+		}
+		Response(200)
+			{
+				"status" : "success"
+			}
+		Response(-1)
+			{
+				"status" : "fail",
+				"message" : "server problem"
+			}
+/s/order
+	Response(GET)
+		{
+			"orders" :
+			[
+				{
+					"orderId" : "adfasd102938",
+					"farmerName" : "Asdf Asdf",
+					"cropName" : "onion",
+					"quantity" : 10,
+					"date" : 2012-04-23T18:25:43.511Z,
+					"paymentStatus" : "done",
+					"deliver" : "done"
+				},
+				{
+					"orderId" : "adfasd102938",
+					"farmerName" : "Asdf Asdf",
+					"cropName" : "onion",
+					"quantity" : 10,
+					"date" : 2012-04-23T18:25:43.511Z,
+					"paymentStatus" : "done",
+					"deliver" : "done"
+				},
+			]
+		}
+/b/account
+	Request(POST):
+		{
+			"name" : "Aasd",
+			"emailAddress" : "asdf@adf.com",
+			"phoneNumber" : 29898983222,
+			"password" : "asdf1234afasdf"
+		}
+		Response(200)
+			{
+				"status" : "success",
+			}
+		Response(-1)
+			{
+				"status" : "fail",
+				"message" : "server problem"
+			}
+	Response(GET):
+		{
+			"name" : "Asdf Asdf",
+			"phoneNumber": 1029023900,
+			"emailAddress" : "asdfasdf@adsf.com"
+		}
+/s/account
+	Request(POST):
+		{
+			"password" : "231313",
+			"phoneNumber": "9079327009",
+			"Name": "Asdf Asdf",
+			"location" : [70.1244, 40.1324],
+			"deliveryUpto" : 15,
+			"bankDetails" : {
+				"accountNumber" : 121212121312314,
+				"IFSC" : "TNA12341CA"
+			}
+		}
+		Response(200)
+		{
+			"status": "success"
+		}
+	Response(GET):
+		{
+			"password" : "231313",
+			"phoneNumber": "9079327009",
+			"Name": "Asdf Asdf",
+			"location" : [70.1244, 40.1324],
+			"deliveryUpto" : 15,
+			"bankDetails" : {
+				"accountNumber" : 121212121312314,
+				"IFSC" : "TNA12341CA"
+			}
+		}
+/s/crops/inventory
+	Response(GET):
+		{
+			"inventory" :
+			[
+				{
+					"cropName" : "onion",
+					"quantity" : 1000,
+				},
+				{
+					"cropName" : "onion",
+					"quantity" : 1000,
+				}
+			]
+		}
+	Response(POST):
+		{
+			"cropName" : "onion",
+			"quantity" : 1000
+		}
+/s/crops/inventory/u
+	Request(POST):
+		{
+			"cropName" : "onion",
+			"quantity" : 800
+		}
