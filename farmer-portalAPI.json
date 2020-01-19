@@ -1,0 +1,129 @@
+/s/register/
+	Request : (POST)
+	{
+		"password": "asdfghjkl",
+		"phoneNumber": "9079327009",
+		"Name": "Asdf Asdf",
+		"location" : [70.1244, 40.1324],
+		"deliveryUpto" : 15,
+		"bankDetails" : {
+			"accountNumber" : 121212121312314,
+			"IFSC" : "TNA12341CA"
+		}
+	}
+	Response (200):
+	{
+		"authentication_token": "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy	r3qu23grk2h3g41278rty1u23gd78r3th9783126r982736",
+		"status": "success"
+	}
+	Response (-1)
+	{
+		"status" : "fail",
+		"message" : "problem server"
+	}
+/b/register/
+	request : (POST)
+	{
+		"password": "asdfghjkl",
+		"phoneNumber": "9079327009",
+		"Name": "Asdf Asdf",
+		"emailAddress" : "asdfgh@asdfgh.com"
+	}
+	Response(200):
+	{
+		"status": "success",
+		"authentication_token" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"
+	}
+	Response(-1):
+	{
+		"status": "fail",
+		"message": "problem server"
+	}
+/b/login
+	Request(POST)
+	{
+		"phoneNumber": "9079327009",
+		"password" : "password"
+	}
+	Response(200):
+	{
+		"status": "success",
+		"authentication_token" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"
+	}
+	Response(-1):
+	{
+		"status": "fail",
+		"message": "problem server"
+	}
+
+	/s/login
+		Request (POST)
+	{
+		"phoneNumber": "9079327009",
+		"password" : "password"
+	}
+	Response(200):
+	{
+		"status": "success",
+		"authentication_token" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"
+	}
+	Response(-1):
+	{
+		"status": "fail",
+		"message": "problem server"
+	}
+/crops
+	Request (GET)
+	Response:
+	{
+		"cropNames" : ["onion", "potato", "tomato"]
+	}
+/s/crops/prediction?cropname=onion
+	Request (GET)
+	Response:
+	{
+		"predictedPrice" : 23
+	}
+/b/crops/'onion'/farmers
+	Request(GET)
+	params :
+		qty : quantity (Integer)
+		s : sortBy
+			dis : distance
+			r : rating
+			del : deliveryTime
+		md : maxDistance
+	{
+		"farmers" :
+		[
+			{
+				"Name": "Asdf Asdf",
+				"phoneNumber": "9079327009",
+				"location" : [70.1313, 40.3443]
+			},
+			{
+				"Name": "Asdf Asdf",
+				"phoneNumber": "9079327009",
+				"location" : [70.1313, 40.3443]
+			}
+		]
+	}
+/b/crops/rating
+	Request (POST)
+		{
+			"phoneNumber" : 908018083080,
+			"cropName": "onion",
+			"rating": 4
+		}
+	Response (200):
+		{
+			"status" : "success"
+		}
+	Response (-1):
+		{
+			"status" : "fail",
+			"message" : "server problem"
+		}
+	Request (GET)
+		params:
+
