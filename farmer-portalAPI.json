@@ -7,7 +7,7 @@
 		"location" : [70.1244, 40.1324],
 		"deliveryUpto" : 15,
 		"bankDetails" : {
-			"accountNumber" : 121212121312314,
+			"paypal_account" : 123123123123123,
 			"IFSC" : "TNA12341CA"
 		}
 	}
