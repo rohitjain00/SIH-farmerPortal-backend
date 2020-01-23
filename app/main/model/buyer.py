@@ -1,4 +1,7 @@
+import pymongo
+
 from app.main import db
+
 """
 To use database : 
     1. import the db variable from app.main
@@ -12,8 +15,8 @@ def buyer_exist(phone_number):
     :param phone_number: phone Number of the user
     :return: boolean
     """
-    if db.buyers.find({'phone_number' : phone_number}).count() > 0
-        return true
+    if db.buyers.find({'phone_number': phone_number}).count() > 0:
+        return True
     return False
 
 
@@ -24,25 +27,23 @@ def buyer_exist(phone_number, password):
     :param password: Password of the user
     :return: boolean
     """
-    if db.buyers.find({'phone_number' : phone_number , 'password' = password }).count() > 0
-        return true
+    if db.buyers.find({'phone_number': phone_number, 'password': password}).count() > 0:
+        return True
     return False
 
-    
 
 def add_new_user(data):
-    
     """
     Add new buyer to the database
     :param data: {'password' : 'asdf', 'phoneNumber': 90909090090, 'name': 'asdf', 'emailAddress': 'asddf@asdf.com'}
     :return: boolean
     """
-    try:
-        rec_id = db.buyers.insert_one(data)
-        return rec_id.matched_count > 0
-    except:pymongo.errors.PyMongoError as e:
-            return false
-    
+    # try:
+    #     rec_id = db.buyers.insert_one(data)
+    #     return rec_id.matched_count > 0
+    # except:pymongo.errors.PyMongoError as e:
+    #         return False
+
 
 def get_authentication_token(phone_number):
     """
