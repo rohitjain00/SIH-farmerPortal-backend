@@ -56,8 +56,8 @@
 		"message": "problem server"
 	}
 
-	/s/login
-		Request (POST)
+/s/login
+	Request (POST)
 	{
 		"phoneNumber": "9079327009",
 		"password" : "password"
@@ -71,6 +71,20 @@
 	{
 		"status": "fail",
 		"message": "problem server"
+	}
+/logout
+	Request(POST)
+	{
+		"authenticationToken" : "asdfasdasdfasdfasdfasdfasdf"
+	}
+	Response(201)
+	{
+		"status" : "success"
+	}
+	Response(-1)
+	{
+		"status" : "fail",
+		"messsage": "server problem"
 	}
 /crops
 	Request (GET)
