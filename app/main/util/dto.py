@@ -2,7 +2,7 @@ from flask_restplus import Namespace, fields
 
 
 class buyerDto:
-    api = Namespace('buyer', description='user related operations')
+    api = Namespace('buyer', description='Buyer login register related operations')
     buyer_register = api.model('buyer_register', {
         'phoneNumber': fields.Integer(required=True, description='user\'s phone number'),
         'password': fields.String(required=True, description='user\'s password'),
