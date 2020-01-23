@@ -15,7 +15,7 @@ def buyer_already_exist(phone_number):
     :param phone_number: phone Number of the user
     :return: boolean
     """
-    if db.buyer.find({'phone_number': phone_number}).count() > 0:
+    if db.buyer.find({'phoneNumber': phone_number}).count() > 0:
         return True
     return False
 
@@ -27,7 +27,7 @@ def buyer_exist(phone_number, password):
     :param password: Password of the user
     :return: boolean
     """
-    if db.buyer.find({'phone_number': phone_number, 'password': password}).count() > 0:
+    if db.buyer.find({'phoneNumber': phone_number, 'password': password}).count() > 0:
         return True
     return False
 
