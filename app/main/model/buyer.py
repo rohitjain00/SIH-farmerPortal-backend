@@ -9,7 +9,7 @@ To use database :
 """
 
 
-def buyer_exist(phone_number):
+def buyer_already_exist(phone_number):
     """
     Check if a buyer exists
     :param phone_number: phone Number of the user
@@ -39,7 +39,7 @@ def add_new_user(data):
     :return: boolean
     """
     rec_id = db.buyer.insert_one(data)
-    if db.buyer.find({ "_id" : rec_id.inserted_id}).count() > 0: 
+    if db.buyer.find({"_id": rec_id.inserted_id}).count() > 0:
         return True
     return False
 
