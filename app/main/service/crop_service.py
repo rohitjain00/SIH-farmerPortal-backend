@@ -1,5 +1,5 @@
 from ..model.crop import get_all_crops, get_price_prediction, get_all_sellers_by_distance, get_all_sellers_by_rating, \
-    get_all_sellers_by_delivery_time, get_all_sellers, get_rating, add_rating_crop, is_crop_available
+    get_all_sellers_by_delivery_time, get_all_sellers, get_rating, add_rating_crop, is_crop_available, get_inventory, add_inventory, update_inventory
 
 from .seller_service import get_fail_message
 
@@ -72,6 +72,7 @@ def add_rating(data):
         return response_object, 201
     return get_fail_message("Unable to add rating"), 409
 
+
 def get_crop_availability(args):
     """
     check and return crop availability
@@ -90,3 +91,43 @@ def get_crop_availability(args):
         "status" : "unavailable"
     }
     return response_object, 200
+
+
+def get_seller_inventory(args):
+    """
+    returns the inventory of the seller
+    :param args: contains the seller's id
+    :return: return a list of the crops and quantity
+    """
+    seller_id = args.get('sId')
+    return get_inventory(seller_id)
+
+
+def add_to_seller_inventory(data):
+    """
+    adds to the inventory of the seller
+    :param data: {"cropId" : "123asdf","sellerId": "2134@324""quantity" : 1000.132,"price" : 123.123}
+    :return: {"status" : "success"} | {"status": "fail","message": "Server Problem"}
+    """
+    crop_id = data['cropId']
+    seller_id = data['sellerId']
+    quantity = data['quantity ']
+    price = data['price']
+    if add_inventory(crop_id, seller_id, quantity, price):
+        return {"status" : "success"}, 201
+    return {"status": "fail", "message": "Server Problem"}, 409
+
+
+def update_seller_inventory(data):
+    """
+    adds to the inventory of the seller
+    :param data: {"cropId" : "123asdf","sellerId": "2134@324""quantity" : 1000.132,"price" : 123.123}
+    :return: {"status" : "success"} | {"status": "fail","message": "Server Problem"}
+    """
+    crop_id = data['cropId']
+    seller_id = data['sellerId']
+    quantity = data['quantity ']
+    price = data['price']
+    if update_inventory(crop_id, seller_id, quantity, price):
+        return {"status" : "success"}, 201
+    return {"status": "fail", "message": "Server Problem"}, 409

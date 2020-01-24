@@ -105,3 +105,36 @@ def is_crop_available(seller_id, crop_id, quantity):
     :return: boolean
     """
     pass
+
+
+def get_inventory(seller_id):
+    """
+    return a list of the inventory of the farmer
+    :param seller_id:
+    :return: A list of {"cropId" : "123adf","quantity" : 1000,"price": 12.13,"dateAdded": date,"lastUpdated": date}
+    """
+    pass
+
+
+def add_inventory(crop_id, seller_id, quantity, price):
+    """
+    add to the inventory new crop
+    :param crop_id:
+    :param seller_id:
+    :param quantity:
+    :param price:
+    :return: Boolean
+    """
+    pass
+
+
+def update_inventory(crop_id, seller_id, quantity, price):
+    """
+    update inventory
+    :param crop_id:
+    :param seller_id:
+    :param quantity:
+    :param price:
+    :return: Boolean
+    """
+    pass
