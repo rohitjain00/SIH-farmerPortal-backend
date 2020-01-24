@@ -1,12 +1,13 @@
 from flask import request
 from flask_restplus import Resource
-from ..service.crop_service import get_crops, get_predicted_price, get_sellers, get_crop_rating
+from ..service.crop_service import get_crops, get_predicted_price, get_sellers, get_crop_rating, add_rating, get_crop_availability
 
 from ..util.dto import CropDTO
 
 api = CropDTO.api
 _crop = CropDTO.crop
-
+_crop_rating = CropDTO.crop_rating
+_crop_availability = CropDTO.crop_availability
 
 @api.route("/")
 class CropList(Resource):
@@ -34,15 +35,30 @@ class CropFarmers(Resource):
         min_qty = request.args.get('mqty')
         sort_by = request.args.get('s')
         max_dis = request.args.get('md')
-        return get_sellers(crop_id, min_qty, sort_by, max_dis)
+        return get_sellers(request.args)
+
 
 @api.route("/rating")
 class CropRating(Resource):
     @api.doc("get rating of a particular crop")
     def get(self):
         """rating of a particular crop"""
-        crop_id = request.args.get('cId')
-        seller_id = request.args.get('sId')
-        return get_crop_rating(crop_id, seller_id)
+        return get_crop_rating(request.args)
+
+    @api.doc("add rating to the crop")
+    @api.expect(_crop_rating, validate=True)
+    def post(self):
+        """add rating to the crop"""
+        post_data = request.json
+        return add_rating(data=post_data)
+
+
+@api.route("/availability")
+class CropAvailability(Resource):
+    @api.doc("check availability of the product")
+    @api.expect(_crop_availability, validate=True)
+    def get(self):
+        """check quantity of the crop"""
+        return get_crop_availability(request.args)
 
 

@@ -40,3 +40,13 @@ class CropDTO:
         'cropId': fields.String(required=True, description='unique ID of the crop'),
         'cropName': fields.String(required=True, description='cropName')
     })
+    crop_rating = api.model('crop_rating', {
+        'sellerId': fields.String(required=True, description='Seller Id of the product'),
+        'cropId': fields.String(required=True, description='cropId of the crop'),
+        'rating': fields.Integer(required=True, description='user provided rating to the product')
+    })
+    # crop_availability = api.model('crop_availability', {
+    #     'sellerId': fields.String(required=True, description='Seller Id of the product'),
+    #     'cropId': fields.String(required=True, description='cropId of the crop'),
+    #     'quantity': fields.Float(required=True, description='quantity to check')
+    # })

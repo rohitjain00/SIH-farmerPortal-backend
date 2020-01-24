@@ -83,3 +83,25 @@ def get_rating(crop_id, seller_id):
     :return:
     """
     pass
+
+
+def add_rating_crop(sellerId, cropId, rating):
+    """
+    add rating to the crop
+    :param sellerId: seller of the crop
+    :param cropId: crop of the seller
+    :param rating: rating provided by the user
+    :return: boolean
+    """
+    pass
+
+
+def is_crop_available(seller_id, crop_id, quantity):
+    """
+    checks if the crop is available
+    :param seller_id: seller Id of the crop
+    :param crop_id: crop Id of the crop
+    :param quantity: quantity to check
+    :return: boolean
+    """
+    pass
