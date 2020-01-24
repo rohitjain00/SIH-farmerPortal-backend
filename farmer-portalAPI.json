@@ -7,8 +7,7 @@
 		"location" : [70.1244, 40.1324],
 		"deliveryUpto" : 15,
 		"bankDetails" : {
-			"paypal_account" : 123123123123123,
-			"IFSC" : "TNA12341CA"
+			"upiID" : "asdf@okicici"
 		}
 	}
 	Response (200):
