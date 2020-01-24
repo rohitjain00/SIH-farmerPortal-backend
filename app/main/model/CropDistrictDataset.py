@@ -1,12 +1,5 @@
-import pymongo
-
-
-from app.main import db
-
-
 """
-    Script for adding all major crops and districts in Database 
-        (new collection for 'districts'  needs to be added) 
+    Dataset of all crops and districts available
 """
 
 
