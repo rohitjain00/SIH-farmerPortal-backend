@@ -1,12 +1,12 @@
 from flask import request
 from flask_restplus import Resource
 
-from ..util.dto import buyerDto
+from ..util.dto import BuyerDto
 from ..service.buyer_service import register, login
 
-api = buyerDto.api
-_buyer_login = buyerDto.buyer_login
-_buyer_register = buyerDto.buyer_register
+api = BuyerDto.api
+_buyer_login = BuyerDto.buyer_login
+_buyer_register = BuyerDto.buyer_register
 
 
 @api.route('/register')

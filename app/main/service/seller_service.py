@@ -1,15 +1,15 @@
-from app.main.model.buyer import buyer_already_exist, buyer_exist, add_new_buyer, get_authentication_token
+from app.main.model.seller import seller_already_exist, add_new_seller, seller_exist, get_authentication_token
 
 
 def register(data):
     """
-    check if the user exists in the database and if not registers the user to the database
-    :param data: {'password' : 'asdf', 'phoneNumber': 90909090090, 'name': 'asdf', 'emailAddress': 'asddf@asdf.com'}
+    check if the seller exists in the database and if not registers the seller to the database
+    :param data: {"password": "asdfghjkl","phoneNumber": "9079327009","Name": "Asdf Asdf","location" : [70.1244, 40.1324],"deliveryUpto" : 15,"bankDetails" : {"upiID" : "asdf@okicici"}}
     :return: {'status' : 'success' | 'failure', "authenticationToken" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"}
     """
-    if buyer_already_exist(data['phoneNumber']):
+    if seller_already_exist(data['phoneNumber']):
         return get_fail_message('phone number already exists'), 409
-    has_added = add_new_buyer(data)
+    has_added = add_new_seller(data)
     if has_added:
         response_object = {
             'status': 'success',
@@ -24,7 +24,7 @@ def login(data):
     :param data: {'phoneNumber': 'asdf', 'password': '12313'}
     :return: {'status' : 'success' | 'failure', "authenticationToken" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"}
     """
-    if buyer_exist(data['phoneNumber'], data['password']):
+    if seller_exist(data['phoneNumber'], data['password']):
         response_object = {
             'status': 'success',
             'authenticationToken': get_authentication_token(data['phoneNumber'])

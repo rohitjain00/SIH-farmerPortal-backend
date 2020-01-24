@@ -1,16 +1,34 @@
 from flask_restplus import Namespace, fields
 
 
-class buyerDto:
+class BuyerDto:
     api = Namespace('buyer', description='Buyer login register related operations')
     buyer_register = api.model('buyer_register', {
-        'phoneNumber': fields.Integer(required=True, description='user\'s phone number'),
-        'password': fields.String(required=True, description='user\'s password'),
-        'name': fields.String(required=True, description='user\'s name'),
-        'emailAddress': fields.String(required=True, description='user\'s email')
+        'phoneNumber': fields.Integer(required=True, description='buyer\'s phone number'),
+        'password': fields.String(required=True, description='buyer\'s password'),
+        'name': fields.String(required=True, description='buyer\'s name'),
+        'emailAddress': fields.String(required=True, description='buyer\'s email')
     })
     buyer_login = api.model('buyer_login', {
-        'phoneNumber': fields.Integer(required=True, description='user\'s phone number'),
-        'password': fields.String(required=True, description='user\'s password')
+        'phoneNumber': fields.Integer(required=True, description='buyer\'s phone number'),
+        'password': fields.String(required=True, description='buyer\'s password')
     })
 
+
+class SellerDTO:
+    api = Namespace('seller', description='Seller login register related operations')
+    bank_details = api.model('bank', {
+        'upiID': fields.String(required=True, description='UPI id of the seller')
+    })
+    seller_registration = api.model('seller_registration', {
+        'phoneNumber': fields.Integer(required=True, description='seller\'s phone number'),
+        'password': fields.String(required=True, description='seller\'s password'),
+        'name': fields.String(required=True, description='seller\'s name'),
+        'location': fields.List(fields.Float, required=True, description='co-ordinates of the Seller, list the longitude first and then latitude'),
+        'deliveryUpto': fields.Float(required=True, description='delivery upto in KMs'),
+        'bankDetails': fields.Nested(bank_details)
+    })
+    seller_login = api.model('seller_login', {
+        'phoneNumber': fields.Integer(required=True, description='seller\'s phone number'),
+        'password': fields.String(required=True, description='seller\'s password')
+    })

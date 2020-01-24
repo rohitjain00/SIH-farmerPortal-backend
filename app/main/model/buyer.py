@@ -1,5 +1,3 @@
-import pymongo
-
 from app.main import db
 
 """
@@ -32,7 +30,7 @@ def buyer_exist(phone_number, password):
     return False
 
 
-def add_new_user(data):
+def add_new_buyer(data):
     """
     Add new buyer to the database
     :param data: {'password' : 'asdf', 'phoneNumber': 90909090090, 'name': 'asdf', 'emailAddress': 'asddf@asdf.com'}
