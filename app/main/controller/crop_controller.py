@@ -7,7 +7,6 @@ from ..util.dto import CropDTO
 api = CropDTO.api
 _crop = CropDTO.crop
 _crop_rating = CropDTO.crop_rating
-_crop_availability = CropDTO.crop_availability
 
 @api.route("/")
 class CropList(Resource):
@@ -56,7 +55,6 @@ class CropRating(Resource):
 @api.route("/availability")
 class CropAvailability(Resource):
     @api.doc("check availability of the product")
-    @api.expect(_crop_availability, validate=True)
     def get(self):
         """check quantity of the crop"""
         return get_crop_availability(request.args)
