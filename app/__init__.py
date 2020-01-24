@@ -4,7 +4,7 @@ from flask_restplus import Api
 from flask import Blueprint
 
 from .main.controller.buyer_controller import api as buyer_ns
-from .main.controller.buyer_controller import api as seller_ns
+from .main.controller.seller_controller import api as seller_ns
 
 blueprint = Blueprint('api', __name__)
 

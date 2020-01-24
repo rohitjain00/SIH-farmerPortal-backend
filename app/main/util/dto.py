@@ -32,3 +32,11 @@ class SellerDTO:
         'phoneNumber': fields.Integer(required=True, description='seller\'s phone number'),
         'password': fields.String(required=True, description='seller\'s password')
     })
+
+
+class CropDTO:
+    api = Namespace('crop', description='get crop methods')
+    crop = api.model('crop', {
+        'cropId': fields.String(required=True, description='unique ID of the crop'),
+        'cropName': fields.String(required=True, description='cropName')
+    })
