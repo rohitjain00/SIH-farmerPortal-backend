@@ -35,7 +35,7 @@ class SellerDTO:
 
 
 class CropDTO:
-    api = Namespace('crop', description='get crop methods')
+    api = Namespace('crop', description='crop related operations')
     crop = api.model('crop', {
         'cropId': fields.String(required=True, description='unique ID of the crop'),
         'cropName': fields.String(required=True, description='cropName')
@@ -45,8 +45,26 @@ class CropDTO:
         'cropId': fields.String(required=True, description='cropId of the crop'),
         'rating': fields.Integer(required=True, description='user provided rating to the product')
     })
-    # crop_availability = api.model('crop_availability', {
-    #     'sellerId': fields.String(required=True, description='Seller Id of the product'),
-    #     'cropId': fields.String(required=True, description='cropId of the crop'),
-    #     'quantity': fields.Float(required=True, description='quantity to check')
-    # })
+
+
+class OrderDTO:
+    api = Namespace('order', description='order related operations')
+    order = api.model('order', {
+        "orderId": fields.String(required=True, description="order Id of the order"),
+        "sellerName": fields.String(required=True, description="seller's name"),
+        "sellerPhoneNumber": fields.Integer(required=True, description="seller's phone number"),
+        "cropName": fields.String(required=True, description="crop name that was sold"),
+        "quantity": fields.Float(required=True, description="quantity purchased"),
+        "date": fields.DateTime(required=True, description="date time of the order placed"),
+        "paymentStatus": fields.Boolean(required=True, description="payment flag"),
+        "deliver": fields.Boolean(required=True, description="delivery flag")
+    })
+    place_order = api.model('place_order', {
+        'sellerId': fields.String(required=True, description='Id of the seller selling the crop'),
+        'cropId': fields.String(required=True, description='Id of the crop that is sold'),
+        'quantity': fields.Float(required=True, description='quantity sold in Kgs'),
+        'price': fields.Float(required=True, description='price at selling time'),
+        'buyerId': fields.Float(required=True, description='Id of the buyer buying the crop'),
+        'paymentType': fields.String(required=True, description='payment mode of the order'),
+        'deliveryType': fields.String(required=True, description='delivery type of the order')
+    })

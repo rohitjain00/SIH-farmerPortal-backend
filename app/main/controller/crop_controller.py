@@ -1,12 +1,14 @@
 from flask import request
 from flask_restplus import Resource
-from ..service.crop_service import get_crops, get_predicted_price, get_sellers, get_crop_rating, add_rating, get_crop_availability
+from ..service.crop_service import get_crops, get_predicted_price, get_sellers, get_crop_rating, add_rating, \
+    get_crop_availability
 
 from ..util.dto import CropDTO
 
 api = CropDTO.api
 _crop = CropDTO.crop
 _crop_rating = CropDTO.crop_rating
+
 
 @api.route("/")
 class CropList(Resource):
@@ -58,5 +60,3 @@ class CropAvailability(Resource):
     def get(self):
         """check quantity of the crop"""
         return get_crop_availability(request.args)
-
-
