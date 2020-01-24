@@ -1,4 +1,5 @@
 from app.main import db
+from datetime import date , datetime
 
 """
 To use database : 
@@ -36,9 +37,34 @@ def add_new_buyer(data):
     :param data: {'password' : 'asdf', 'phoneNumber': 90909090090, 'name': 'asdf', 'emailAddress': 'asddf@asdf.com'}
     :return: boolean
     """
+    
+    """
+    For Adding Date and Time Both  
+    today = datetime.now()
+    d1 = today.strftime("%d/%m/%Y %H:%M:%S")
+    data['registeredDateTime'] = d1
+    """
+    
+    #Adding extra field for storing date in the record 
+    today = date.today()
+    d1 = today.strftime("%d/%m/%Y")
+    data['registeredDate'] = d1
+    
     rec_id = db.buyer.insert_one(data)
-    if db.buyer.find({"_id": rec_id.inserted_id}).count() > 0:
+    if db.buyer.find({ "_id" : rec_id.inserted_id}).count() > 0: 
         return True
+    return False
+
+def getRegisteredDate(phoneNumber):
+    """
+    Get the Registered date of the buyer 
+        -param : phoneNumber (as it is the unique-id used in database)
+        -return: boolean -- if buyer doesn't exist
+                 date -- if user exist
+    """
+    if db.buyer.find({'phoneNumber': phoneNumber}).count() > 0:
+        data = db.buyer.find_one({'phoneNumber': phoneNumber})
+        return data['registeredDate'];
     return False
 
 
