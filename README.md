@@ -1,3 +1,5 @@
+[![Build Status](https://travis-ci.com/rohitjain00/SIH-farmerPortal-backend.svg?token=5M47HtEEpBk1wLoBPeZH&branch=master)](https://travis-ci.com/rohitjain00/SIH-farmerPortal-backend)
+
 # SIH-farmerPortal-backend
 API for farmer portal
 
