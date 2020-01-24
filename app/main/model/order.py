@@ -34,7 +34,11 @@ def set_payment_flag(order_id):
     :param order_id: order id of the order to set the flag of
     :return: return boolean
     """
-    pass
+    order_data = db.order.update_one({'_id' : order_id },{ '$set' : {'paymentDone' : True} } )
+    order_data = db.order.find_one({"_id" : order_id})
+    if(order_data['paymentDone']):
+        return True
+    return False
 
 
 def is_set_payment(order_id):
@@ -43,7 +47,10 @@ def is_set_payment(order_id):
     :param order_id: order's id to check from
     :return: boolean
     """
-    pass
+    order = db.order.find_one({"_id" : order_id})
+    if(order['paymentDone']):
+        return True
+    return False
 
 def set_delivery_flag(order_id):
     """
@@ -51,7 +58,11 @@ def set_delivery_flag(order_id):
     :param order_id: order id of the order to set the flag of
     :return: return boolean
     """
-    pass
+    order_data = db.order.update_one({'_id' : order_id },{ '$set' : {'deliveryDone' : True} } )
+    order_data = db.order.find_one({"_id" : order_id})
+    if(order_data['deliveryDone']):
+        return True
+    return False
 
 
 def is_set_delivery(order_id):
@@ -60,5 +71,8 @@ def is_set_delivery(order_id):
     :param order_id: order's id to check from
     :return: boolean
     """
-    pass
+    order = db.order.find_one({"_id" : order_id})
+    if(order['deliveryDone']):
+        return True
+    return False
 
