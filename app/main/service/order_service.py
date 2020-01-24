@@ -1,4 +1,4 @@
-from app.main.model.order import get_all_buyer_orders, get_all_seller_orders, add_order
+from app.main.model.order import get_all_buyer_orders, get_all_seller_orders, add_order, set_payment_flag, is_set_payment
 
 
 def get_orders(args):
@@ -26,3 +26,49 @@ def place_order(data):
         return response_object, 409
     response_object = {'status':'success', 'orderId': response}
     return response_object, 201
+
+
+def set_payment(data):
+    """
+    set the payment flag of the order
+    :param data: contains the order Id
+    :return: {'status': 'success'} | {"status" : "fail","message" : "Server Problem"}
+    """
+    order_id = data['orderId']
+    if set_payment_flag(order_id):
+        return {'status': 'success'}, 201
+    return {"status": "fail", "message": "Server Problem"}, 409
+
+
+def get_payment(args):
+    """
+    get the payment flag of the order
+    :param args: contains the order Id of the order
+    :return: {"status" : "success"} | {"status" : "fail","message" : "Server Problem"}
+    """
+    order_id = args.get('oId')
+
+    return {'payment': is_set_payment(order_id)}, 201
+
+
+def set_delivery(data):
+    """
+    set the deliver flag of the order
+    :param data: contains the order Id
+    :return: {'status': 'success'} | {"status" : "fail","message" : "Server Problem"}
+    """
+    order_id = data['orderId']
+    if set_payment_flag(order_id):
+        return {'status': 'success'}, 201
+    return {"status": "fail", "message": "Server Problem"}, 409
+
+
+def get_delivery(args):
+    """
+    get the payment flag of the order
+    :param args: contains the order Id of the order
+    :return: {"status" : "success"} | {"status" : "fail","message" : "Server Problem"}
+    """
+    order_id = args.get('oId')
+
+    return {'delivery': is_set_payment(order_id)}, 201

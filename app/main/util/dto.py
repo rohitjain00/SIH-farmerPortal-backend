@@ -68,3 +68,6 @@ class OrderDTO:
         'paymentType': fields.String(required=True, description='payment mode of the order'),
         'deliveryType': fields.String(required=True, description='delivery type of the order')
     })
+    set_flag = api.model('set_flag', {
+        'orderId': fields.String(required=True, description='order id of the order to change flags of')
+    })

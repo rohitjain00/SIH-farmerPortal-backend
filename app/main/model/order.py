@@ -26,3 +26,39 @@ def add_order(data):
     :return: None if unsuccessful insertion else return the unique Id of the order added
     """
     pass
+
+
+def set_payment_flag(order_id):
+    """
+    set the payment flag of the order to true
+    :param order_id: order id of the order to set the flag of
+    :return: return boolean
+    """
+    pass
+
+
+def is_set_payment(order_id):
+    """
+    check if the payment flag of the order is true
+    :param order_id: order's id to check from
+    :return: boolean
+    """
+    pass
+
+def set_delivery_flag(order_id):
+    """
+    set the payment flag of the order to true
+    :param order_id: order id of the order to set the flag of
+    :return: return boolean
+    """
+    pass
+
+
+def is_set_delivery(order_id):
+    """
+    check if the payment flag of the order is true
+    :param order_id: order's id to check from
+    :return: boolean
+    """
+    pass
+
