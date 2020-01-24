@@ -89,7 +89,17 @@
 	Request (GET)
 	Response:
 	{
-		"cropNames" : ["onion", "potato", "tomato"]
+		"crops" : 
+		[
+			{
+				"cropName" : "onion",
+				"cropId": "123asdf13421"
+			},
+			{
+				"cropName" : "onion",
+				"cropId": "123asdf13421"
+			}
+		]
 	}
 /s/crops/prediction?cropname=onion
 	Request (GET)
