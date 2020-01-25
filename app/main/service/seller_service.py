@@ -1,4 +1,5 @@
-from app.main.model.seller import seller_already_exist, add_new_seller, seller_exist, get_authentication_token
+from app.main.model.seller import seller_already_exist, add_new_seller, seller_exist
+from app.main.util.auth import password_hash, get_authentication_token
 
 
 def register(data):
@@ -9,6 +10,7 @@ def register(data):
     """
     if seller_already_exist(data['phoneNumber']):
         return get_fail_message('phone number already exists'), 409
+    data['password'] = password_hash(data['password'])
     has_added = add_new_seller(data)
     if has_added:
         response_object = {
@@ -24,6 +26,7 @@ def login(data):
     :param data: {'phoneNumber': 'asdf', 'password': '12313'}
     :return: {'status' : 'success' | 'failure', "authenticationToken" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"}
     """
+    data['password'] = password_hash(data['password'])
     if seller_exist(data['phoneNumber'], data['password']):
         response_object = {
             'status': 'success',

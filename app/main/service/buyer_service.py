@@ -1,4 +1,5 @@
-from app.main.model.buyer import buyer_already_exist, buyer_exist, add_new_buyer, get_authentication_token
+from app.main.model.buyer import buyer_already_exist, buyer_exist, add_new_buyer
+from app.main.util.auth import password_hash, get_authentication_token
 
 
 def register(data):
@@ -9,6 +10,7 @@ def register(data):
     """
     if buyer_already_exist(data['phoneNumber']):
         return get_fail_message('phone number already exists'), 409
+    data['password'] = password_hash(data['password'])
     has_added = add_new_buyer(data)
     if has_added:
         response_object = {
@@ -24,13 +26,14 @@ def login(data):
     :param data: {'phoneNumber': 'asdf', 'password': '12313'}
     :return: {'status' : 'success' | 'failure', "authenticationToken" : "asdfasdkjfhaljhfalskdjfghoq782364ro8qwyhraiwy37842qy"}
     """
+    data['password'] = password_hash(data['password'])
     if buyer_exist(data['phoneNumber'], data['password']):
         response_object = {
             'status': 'success',
             'authenticationToken': get_authentication_token(data['phoneNumber'])
         }
         return response_object, 201
-    return get_fail_message("user not present")
+    return get_fail_message("user not present"), 409
 
 
 def get_fail_message(error_message):
