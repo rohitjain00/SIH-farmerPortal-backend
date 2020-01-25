@@ -7,7 +7,10 @@ def seller_already_exist(phoneNumber):
     :param phoneNumber: phone number of the seller
     :return: boolean
     """
-    return True
+    if db.seller.find({'phoneNumber': phoneNumber}).count() > 0:
+        return True
+    return False
+    
 
 
 def add_new_seller(data):
@@ -16,7 +19,11 @@ def add_new_seller(data):
     :param data: {"password": "asdfghjkl","phoneNumber": "9079327009","Name": "Asdf Asdf","location" : [70.1244, 40.1324],"deliveryUpto" : 15,"bankDetails" : {"upiID" : "asdf@okicici"}}
     :return: boolean
     """
-    return True
+    rec_id = db.seller.insert_one(data)
+    if db.seller.find({ "_id" : rec_id.inserted_id}).count() > 0: 
+        return True
+    return False
+    
 
 
 def seller_exist(phoneNumber, password):
@@ -26,7 +33,9 @@ def seller_exist(phoneNumber, password):
     :param password: password of the seller
     :return: boolean
     """
-    return True
+    if db.seller.find({'phoneNumber': phoneNumber, 'password': password}).count() > 0:
+        return True
+    return False
 
 
 def get_authentication_token(phoneNumber):
