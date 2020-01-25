@@ -14,7 +14,8 @@ def get_authentication_token(phone_number):
     :param phone_number: phone numner to encode in
     :return: string
     """
-    return encode_auth_token(phone_number)
+    return "temp_token"
+    # return encode_auth_token(phone_number)
 
 
 def get_user_phone_number(token):
