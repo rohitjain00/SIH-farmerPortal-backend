@@ -45,6 +45,21 @@ class CropDTO:
         'cropId': fields.String(required=True, description='cropId of the crop'),
         'rating': fields.Integer(required=True, description='user provided rating to the product')
     })
+    crop_inventory_get = api.model('crop_inventory', {
+        'cropId': fields.String(required=True, description='crop Id of the crop'),
+        'quantity': fields.Float(required=True, description='quantity available'),
+        'price': fields.Float(required=True, description='price allocated to the crop'),
+        'dateAdded': fields.DateTime(required=True, description='date time the crop was added'),
+        'lastUpdated': fields.DateTime(required=True, description='date time of last updated values')
+    })
+
+    crop_inventory_post = api.model('crop_inventory_post', {
+        'cropId': fields.String(required=True, description='crop Id of the crop'),
+        'sellerId': fields.String(required=True, description='seller Id of the crop\'s seller'),
+        'quantity': fields.Float(required=True, description='quantity available'),
+        'price': fields.Float(required=True, description='price allocated to the crop')
+    })
+
 
 
 class OrderDTO:
@@ -67,4 +82,7 @@ class OrderDTO:
         'buyerId': fields.Float(required=True, description='Id of the buyer buying the crop'),
         'paymentType': fields.String(required=True, description='payment mode of the order'),
         'deliveryType': fields.String(required=True, description='delivery type of the order')
+    })
+    set_flag = api.model('set_flag', {
+        'orderId': fields.String(required=True, description='order id of the order to change flags of')
     })

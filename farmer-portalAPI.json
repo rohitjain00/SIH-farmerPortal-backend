@@ -101,30 +101,35 @@
 			}
 		]
 	}
-/s/crops/prediction?cropname=onion
+/s/crops/prediction?cId=123ADSJ123
 	Request (GET)
 	Response:
 	{
-		"predictedPrice" : 23
+		"predictedPrice" : 23.12
 	}
-/b/crops/'onion'/farmers
+/b/crops/sellers?
 	Request(GET)
 	params :
-		qty : quantity (Integer)
+		cId : 21adf2131
+		mqty : quantity (Integer)
 		s : sortBy
 			dis : distance
 			r : rating
 			del : deliveryTime
 		md : maxDistance
+		lat : latitude
+		lon : longitude
 	{
-		"farmers" :
+		"sellers" :
 		[
-			{
+			{	
+				"sellerId" : "ad12asd21",
 				"Name": "Asdf Asdf",
 				"phoneNumber": "9079327009",
 				"location" : [70.1313, 40.3443]
 			},
 			{
+				"sellerId" : "ad12asd21",
 				"Name": "Asdf Asdf",
 				"phoneNumber": "9079327009",
 				"location" : [70.1313, 40.3443]
@@ -134,8 +139,8 @@
 /b/crops/rating
 	Request (POST)
 		{
-			"phoneNumber" : 908018083080,
-			"cropName": "onion",
+			"sellerId" : "adsfasdf",
+			"cropId": "123adsf234",
 			"rating": 4
 		}
 	Response (200):
@@ -149,41 +154,41 @@
 		}
 	Request (GET)
 		params:
-			cn : cropName
-			fn : farmerNumber
+			cId : cropId
+			sid : sellerId
 		Response:
 			{
-				"rating" : 4,
+				"rating" : 4.123,
 				"count" : 34
 			}
 /b/crops/availability
-	Request
+	Response(GET)
+		params:
+			cId : cropId
+			sId : sellerId
+			qty : quantity
 		{
-			"farmerNumber" : 901909090113,
-			"cropName" : "onion",
-			"quantity" : 10
-		}
-	Response :
-		{
-			"status" : "available"
-		}
-	Response :
-		{
-			"status" : "unavailable"
+			"status" : "available" | "unavailable"
 		}
 /b/order
 	Response(GET)
+		params
+		usrtype:
+			b : "buyer"
+			s : "seller"
+		id: id of the user
 		{
 			"orders" :
 			[
 				{
 					"orderId" : "adfasd102938",
-					"farmerName" : "Asdf Asdf",
+					"sellerName" : "Asdf Asdf",
+					"sellerPhoneNumber" : 90909439033
 					"cropName" : "onion",
 					"quantity" : 10,
 					"date" : 2012-04-23T18:25:43.511Z,
-					"paymentStatus" : "done",
-					"deliver" : "done"
+					"paymentStatus" : True,
+					"deliver" : True
 				},
 				{
 					"orderId" : "adfasd102938",
@@ -191,16 +196,20 @@
 					"cropName" : "onion",
 					"quantity" : 10,
 					"date" : 2012-04-23T18:25:43.511Z,
-					"paymentStatus" : "pending",
-					"deliver" : "pening"
+					"paymentStatus" : False,
+					"deliver" : False
 				},
 			]
 		}
 	Request(POST)
 		{
-			"farmerNumber" : 9090909090,
-			"cropName" : "onion",
+			"sellerId" : "13123qwer",
+			"cropId" : "12321adfads",
 			"quantity" : 10,
+			"price" : 123.23,
+			"buyerId": "asd1234asdf",
+			"paymentType": "paytm",
+			"deliveryType": "COD"
 		}
 	Response(200)
 		{
@@ -219,7 +228,10 @@
 		}
 		Response(200)
 			{
-				"status" : "success"
+				"payment" : True
+			}
+			{
+				"payment" : False
 			}
 		Response(-1)
 			{
@@ -228,13 +240,13 @@
 			}
 	Response(GET):
 		params:
-			oid : order id
+			oId : order id
 		{
-			"status" : "done"
+			"delivery" : True
 		}
 	Response(GET):
 		{
-			"status" : "pending
+			"delivery" : "pending
 
 
 
@@ -336,27 +348,47 @@
 		}
 /s/crops/inventory
 	Response(GET):
+		params:
+		sId : seller's Id
 		{
 			"inventory" :
 			[
 				{
-					"cropName" : "onion",
+					"cropId" : "123adf",
 					"quantity" : 1000,
+					"price": 12.13,
+					"dateAdded": date,
+					"lastUpdated": date
 				},
 				{
-					"cropName" : "onion",
+					"cropId" : "123adf",
 					"quantity" : 1000,
+					"price": 12.13,
+					"dateAdded": date,
+					"lastUpdated": date
 				}
 			]
 		}
 	Response(POST):
 		{
-			"cropName" : "onion",
-			"quantity" : 1000
+			"cropId" : "123asdf",
+			"sellerId": "2134@324"
+			"quantity" : 1000.132,
+			"price" : 123.123
+		}
+		Response:
+		{
+			"status" : "success"
+		}
+		{
+			"status": "fail",
+			"message": "Server Problem"
 		}
 /s/crops/inventory/u
 	Request(POST):
-		{
-			"cropName" : "onion",
-			"quantity" : 800
+		{	
+			"cropId" : "123asdf",
+			"sellerId": "2134@324"
+			"quantity" : 1000.132,
+			"price" : 123.123
 		}

@@ -38,7 +38,7 @@ def add_new_buyer(data):
     :return: boolean
     """
          
-    #Adding extra field for storing date/Time in the record 
+    # Adding extra field for storing date/Time in the record
     today = datetime.now()
     data['registeredDateTime'] = today
     rec_id = db.buyer.insert_one(data)
@@ -49,10 +49,10 @@ def add_new_buyer(data):
 
 def get_registered_date_time(buyer_id):
     """
-    Get the Registered date of the buyer 
-        -param : buyerId 
-        -return: boolean -- if buyer doesn't exist
-                 string -- containing date/Time
+    Get the Registered date of the buyer
+    :param buyer_id:
+    :return: boolean -- if buyer doesn't exist
+             string -- containing date/Time
     """
     if db.buyer.find({'_id': buyer_id }).count() > 0:
         data = db.buyer.find_one({'_id': buyer_id })
@@ -60,12 +60,3 @@ def get_registered_date_time(buyer_id):
         date = date.strftime("%d/%m/%Y %H:%M:%S")
         return date
     return False
-
-
-def get_authentication_token(phone_number):
-    """
-    Creates a token for the user with phone number
-    :param phone_number: phone number to create authentication token of
-    :return: string
-    """
-    return "temp_token"
