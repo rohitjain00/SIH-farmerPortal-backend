@@ -6,7 +6,11 @@ def get_all_crops():
     return all the crops from the database in form of [{'cropName': 'onion', 'cropId': '12312'}]
     :return: list of crops
     """
-    pass
+    l = []
+    crop = db.crop.find()
+    for i in crop:
+        l.append(i)
+    return l
 
 
 def get_price_prediction(cropId):
