@@ -1,5 +1,6 @@
 from app.main import db
 from datetime import datetime 
+from bson import ObjectId
 
 def get_all_buyer_orders(buyer_id):
     """
@@ -7,16 +8,62 @@ def get_all_buyer_orders(buyer_id):
     :param buyer_id: id of the buyer
     :return: List of {"orderId" : "adfasd102938","sellerName" : "Asdf Asdf","sellerPhoneNumber" : 90909439033"cropName" : "onion","quantity" : 10,"date" : 2012-04-23T18:25:43.511Z,"paymentStatus" : True,"deliver" : True}
     """
-    pass
+    order_buyer = db.order.find({'orderTo' : str(buyer_id)} , sort=[('date', pymongo.DESCENDING)])
+    all_orders = []
+    for i in order_buyer:
+        order = {}
+        order['orderId'] = i['_id']
+        
+        #accesing seller database
+        seller = db.seller.find_one({'_id' : ObjectId(i['orderFrom'])})
+        order['sellerName'] = seller['name']
+        order['sellerPhoneNumber'] = seller['phoneNumber']
+        
+        #Accesing Crop database
+        order['cropName'] = db.crop.find_one({'_id' : ObjectId(i['crop'])})['cropName']
+        
+        order['quantity'] = i['quantity']
+        order['date'] = i['date']
+        order['paymentStatus'] = i['paymentDone']
+        order['deliveryStatus'] = i['deliveryDone']
+        
+        all_orders.append(order)
+    
+    return all_orders
+
+
 
 
 def get_all_seller_orders(seller_id):
     """
     get all order of seller sorted by date in descending order
     :param seller_id: id of the buyer
-    :return: List of {"orderId" : "adfasd102938","sellerName" : "Asdf Asdf","sellerPhoneNumber" : 90909439033"cropName" : "onion","quantity" : 10,"date" : 2012-04-23T18:25:43.511Z,"paymentStatus" : True,"deliver" : True}
+    :return: List of {"orderId" : "adfasd102938","buyerName" : "Asdf Asdf","buyerPhoneNumber" : 90909439033"cropName" : "onion","quantity" : 10,"date" : 2012-04-23T18:25:43.511Z,"paymentStatus" : True,"deliver" : True}
     """
-    pass
+    
+    order_seller = db.order.find({'orderFrom' : str(seller_id)} , sort=[('date', pymongo.DESCENDING)])
+    all_orders = []
+    for i in order_seller:
+        order = {}
+        order['orderId'] = i['_id']
+        
+        #accesing buyer database
+        buyer = db.buyer.find_one({'_id' : ObjectId(i['orderTo'])})
+        #print(buyer)
+        order['buyerName'] = buyer['name']
+        order['buyerPhoneNumber'] = buyer['phoneNumber']
+        
+        #Accesing Crop database
+        order['cropName'] = db.crop.find_one({'_id' : ObjectId(i['crop'])})['cropName']
+        
+        order['quantity'] = i['quantity']
+        order['date'] = i['date']
+        order['paymentStatus'] = i['paymentDone']
+        order['deliveryStatus'] = i['deliveryDone']
+        
+        all_orders.append(order)
+    
+    return all_orders
 
 
 def add_order(data):
