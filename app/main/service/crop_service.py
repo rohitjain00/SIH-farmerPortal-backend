@@ -34,14 +34,15 @@ def get_sellers(args):
     min_qty = args.get('mqty')
     sort_by = args.get('s')
     max_dis = args.get('md')
-
+    longitude = args.get('lon')
+    latitude = args.get('lat')
     if sort_by == 'dis':
-        return get_all_sellers_by_distance(crop_id, min_qty, max_dis)
+        return get_all_sellers_by_distance(crop_id, min_qty, max_dis, longitude, latitude)
     elif sort_by == 'r':
-        return get_all_sellers_by_rating(crop_id, min_qty, max_dis)
+        return get_all_sellers_by_rating(crop_id, min_qty, max_dis, longitude, latitude)
     elif sort_by == 'del':
-        return get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis)
-    return get_all_sellers(crop_id, min_qty, max_dis)
+        return get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis, longitude, latitude)
+    return get_all_sellers(crop_id, min_qty, max_dis, longitude, latitude)
 
 
 def get_crop_rating(args):

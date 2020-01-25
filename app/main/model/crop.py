@@ -31,9 +31,11 @@ all the get sellers method should return the data in this format
 """
 
 
-def get_all_sellers_by_distance(crop_id, min_qty, max_dis):
+def get_all_sellers_by_distance(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get sellers sorted by distance
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -42,9 +44,11 @@ def get_all_sellers_by_distance(crop_id, min_qty, max_dis):
     pass
 
 
-def get_all_sellers_by_rating(crop_id, min_qty, max_dis):
+def get_all_sellers_by_rating(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get sellers sorted by rating
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -53,9 +57,11 @@ def get_all_sellers_by_rating(crop_id, min_qty, max_dis):
     pass
 
 
-def get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis):
+def get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get sellers sorted by delivery time
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -64,9 +70,11 @@ def get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis):
     pass
 
 
-def get_all_sellers(crop_id, min_qty, max_dis):
+def get_all_sellers(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get all sellers without any sorting
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
