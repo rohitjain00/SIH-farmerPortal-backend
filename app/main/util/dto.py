@@ -45,6 +45,21 @@ class CropDTO:
         'cropId': fields.String(required=True, description='cropId of the crop'),
         'rating': fields.Integer(required=True, description='user provided rating to the product')
     })
+    crop_inventory_get = api.model('crop_inventory', {
+        'cropId': fields.String(required=True, description='crop Id of the crop'),
+        'quantity': fields.Float(required=True, description='quantity available'),
+        'price': fields.Float(required=True, description='price allocated to the crop'),
+        'dateAdded': fields.DateTime(required=True, description='date time the crop was added'),
+        'lastUpdated': fields.DateTime(required=True, description='date time of last updated values')
+    })
+
+    crop_inventory_post = api.model('crop_inventory_post', {
+        'cropId': fields.String(required=True, description='crop Id of the crop'),
+        'sellerId': fields.String(required=True, description='seller Id of the crop\'s seller'),
+        'quantity': fields.Float(required=True, description='quantity available'),
+        'price': fields.Float(required=True, description='price allocated to the crop')
+    })
+
 
 
 class OrderDTO:

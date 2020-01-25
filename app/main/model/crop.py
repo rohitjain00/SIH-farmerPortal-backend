@@ -35,9 +35,11 @@ all the get sellers method should return the data in this format
 """
 
 
-def get_all_sellers_by_distance(crop_id, min_qty, max_dis):
+def get_all_sellers_by_distance(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get sellers sorted by distance
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -46,9 +48,11 @@ def get_all_sellers_by_distance(crop_id, min_qty, max_dis):
     pass
 
 
-def get_all_sellers_by_rating(crop_id, min_qty, max_dis):
+def get_all_sellers_by_rating(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get sellers sorted by rating
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -57,9 +61,11 @@ def get_all_sellers_by_rating(crop_id, min_qty, max_dis):
     pass
 
 
-def get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis):
+def get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get sellers sorted by delivery time
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -68,9 +74,11 @@ def get_all_sellers_by_delivery_time(crop_id, min_qty, max_dis):
     pass
 
 
-def get_all_sellers(crop_id, min_qty, max_dis):
+def get_all_sellers(crop_id, min_qty, max_dis, longitude, latitude):
     """
     get all sellers without any sorting
+    :param latitude:
+    :param longitude:
     :param crop_id:
     :param min_qty:
     :param max_dis:
@@ -107,5 +115,38 @@ def is_crop_available(seller_id, crop_id, quantity):
     :param crop_id: crop Id of the crop
     :param quantity: quantity to check
     :return: boolean
+    """
+    pass
+
+
+def get_inventory(seller_id):
+    """
+    return a list of the inventory of the farmer
+    :param seller_id:
+    :return: A list of {"cropId" : "123adf","quantity" : 1000,"price": 12.13,"dateAdded": date,"lastUpdated": date}
+    """
+    pass
+
+
+def add_inventory(crop_id, seller_id, quantity, price):
+    """
+    add to the inventory new crop
+    :param crop_id:
+    :param seller_id:
+    :param quantity:
+    :param price:
+    :return: Boolean
+    """
+    pass
+
+
+def update_inventory(crop_id, seller_id, quantity, price):
+    """
+    update inventory
+    :param crop_id:
+    :param seller_id:
+    :param quantity:
+    :param price:
+    :return: Boolean
     """
     pass
