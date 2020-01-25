@@ -47,15 +47,15 @@ def add_new_buyer(data):
     return False
 
 
-def getRegisteredDateTime(buyerId):
+def get_registered_date_time(buyer_id):
     """
     Get the Registered date of the buyer 
         -param : buyerId 
         -return: boolean -- if buyer doesn't exist
                  string -- containing date/Time
     """
-    if db.buyer.find({'_id': buyerId }).count() > 0:
-        data = db.buyer.find_one({'_id': buyerId })
+    if db.buyer.find({'_id': buyer_id }).count() > 0:
+        data = db.buyer.find_one({'_id': buyer_id })
         date = data['registeredDateTime']
         date = date.strftime("%d/%m/%Y %H:%M:%S")
         return date
