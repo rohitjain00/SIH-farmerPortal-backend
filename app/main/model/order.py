@@ -67,7 +67,6 @@ def get_all_seller_orders(seller_id):
 
 
 def add_order(data):
-    def add_order(data):
     """
     adds order to the database and creates a new order Id
     :param data: {"sellerId" : "13123qwer","cropId" : "12321adfads","quantity" : 10,"price" : 123.23,"buyerId": "asd1234asdf","paymentType": "paytm","deliveryType": "COD"}
