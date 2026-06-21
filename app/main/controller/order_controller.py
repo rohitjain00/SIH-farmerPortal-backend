@@ -1,5 +1,5 @@
 from flask import request
-from flask_restplus import Resource
+from flask_restx import Resource
 
 from ..util.dto import OrderDTO
 from ..service.order_service import get_orders, place_order, set_payment, get_payment, set_delivery, get_delivery

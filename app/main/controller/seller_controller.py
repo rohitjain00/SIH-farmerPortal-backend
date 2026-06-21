@@ -1,5 +1,5 @@
 from flask import request
-from flask_restplus import Resource
+from flask_restx import Resource
 
 from ..util.dto import SellerDTO
 from ..service.seller_service import register, login

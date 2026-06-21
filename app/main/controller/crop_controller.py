@@ -1,5 +1,5 @@
 from flask import request
-from flask_restplus import Resource
+from flask_restx import Resource
 from ..service.crop_service import get_crops, get_predicted_price, get_sellers, get_crop_rating, add_rating, \
     get_crop_availability, get_seller_inventory, add_to_seller_inventory, update_seller_inventory
 
