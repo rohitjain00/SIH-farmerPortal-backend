@@ -1,4 +1,4 @@
-from app.main import db
+from app.main import get_db
 from datetime import datetime 
 from bson import ObjectId
 
@@ -8,19 +8,19 @@ def get_all_buyer_orders(buyer_id):
     :param buyer_id: id of the buyer
     :return: List of {"orderId" : "adfasd102938","sellerName" : "Asdf Asdf","sellerPhoneNumber" : 90909439033"cropName" : "onion","quantity" : 10,"date" : 2012-04-23T18:25:43.511Z,"paymentStatus" : True,"deliver" : True}
     """
-    order_buyer = db.order.find({'orderTo' : str(buyer_id)} , sort=[('date', pymongo.DESCENDING)])
+    order_buyer = get_db().order.find({'orderTo' : str(buyer_id)} , sort=[('date', pymongo.DESCENDING)])
     all_orders = []
     for i in order_buyer:
         order = {}
         order['orderId'] = i['_id']
         
         #accesing seller database
-        seller = db.seller.find_one({'_id' : ObjectId(i['orderFrom'])})
+        seller = get_db().seller.find_one({'_id' : ObjectId(i['orderFrom'])})
         order['sellerName'] = seller['name']
         order['sellerPhoneNumber'] = seller['phoneNumber']
         
         #Accesing Crop database
-        order['cropName'] = db.crop.find_one({'_id' : ObjectId(i['crop'])})['cropName']
+        order['cropName'] = get_db().crop.find_one({'_id' : ObjectId(i['crop'])})['cropName']
         
         order['quantity'] = i['quantity']
         order['date'] = i['date']
@@ -41,20 +41,20 @@ def get_all_seller_orders(seller_id):
     :return: List of {"orderId" : "adfasd102938","buyerName" : "Asdf Asdf","buyerPhoneNumber" : 90909439033"cropName" : "onion","quantity" : 10,"date" : 2012-04-23T18:25:43.511Z,"paymentStatus" : True,"deliver" : True}
     """
     
-    order_seller = db.order.find({'orderFrom' : str(seller_id)} , sort=[('date', pymongo.DESCENDING)])
+    order_seller = get_db().order.find({'orderFrom' : str(seller_id)} , sort=[('date', pymongo.DESCENDING)])
     all_orders = []
     for i in order_seller:
         order = {}
         order['orderId'] = i['_id']
         
         #accesing buyer database
-        buyer = db.buyer.find_one({'_id' : ObjectId(i['orderTo'])})
+        buyer = get_db().buyer.find_one({'_id' : ObjectId(i['orderTo'])})
         #print(buyer)
         order['buyerName'] = buyer['name']
         order['buyerPhoneNumber'] = buyer['phoneNumber']
         
         #Accesing Crop database
-        order['cropName'] = db.crop.find_one({'_id' : ObjectId(i['crop'])})['cropName']
+        order['cropName'] = get_db().crop.find_one({'_id' : ObjectId(i['crop'])})['cropName']
         
         order['quantity'] = i['quantity']
         order['date'] = i['date']
@@ -84,7 +84,7 @@ def add_order(data):
     order['paymentType'] = data['paymentType']
     order['deliveryType'] = data['deliveryType']
     #print(order)
-    rec_id = db.order.insert_one(order)
+    rec_id = get_db().order.insert_one(order)
     return rec_id.inserted_id
     return NULL
 
@@ -95,8 +95,8 @@ def set_payment_flag(order_id):
     :param order_id: order id of the order to set the flag of
     :return: return boolean
     """
-    order_data = db.order.update_one({'_id' : order_id },{ '$set' : {'paymentDone' : True} } )
-    order_data = db.order.find_one({"_id" : order_id})
+    order_data = get_db().order.update_one({'_id' : order_id },{ '$set' : {'paymentDone' : True} } )
+    order_data = get_db().order.find_one({"_id" : order_id})
     if(order_data['paymentDone']):
         return True
     return False
@@ -108,7 +108,7 @@ def is_set_payment(order_id):
     :param order_id: order's id to check from
     :return: boolean
     """
-    order = db.order.find_one({"_id" : order_id})
+    order = get_db().order.find_one({"_id" : order_id})
     if(order['paymentDone']):
         return True
     return False
@@ -119,8 +119,8 @@ def set_delivery_flag(order_id):
     :param order_id: order id of the order to set the flag of
     :return: return boolean
     """
-    order_data = db.order.update_one({'_id' : order_id },{ '$set' : {'deliveryDone' : True} } )
-    order_data = db.order.find_one({"_id" : order_id})
+    order_data = get_db().order.update_one({'_id' : order_id },{ '$set' : {'deliveryDone' : True} } )
+    order_data = get_db().order.find_one({"_id" : order_id})
     if(order_data['deliveryDone']):
         return True
     return False
@@ -132,7 +132,7 @@ def is_set_delivery(order_id):
     :param order_id: order's id to check from
     :return: boolean
     """
-    order = db.order.find_one({"_id" : order_id})
+    order = get_db().order.find_one({"_id" : order_id})
     if(order['deliveryDone']):
         return True
     return False

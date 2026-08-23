@@ -1,4 +1,4 @@
-from app.main import db
+from app.main import get_db
 
 
 def get_all_crops():

@@ -1,4 +1,4 @@
-from app.main import db
+from app.main import get_db
 
 
 def seller_already_exist(phone_number):
@@ -7,7 +7,7 @@ def seller_already_exist(phone_number):
     :param phoneNumber: phone number of the seller
     :return: boolean
     """
-    if db.seller.find({'phoneNumber': phone_number}).count() > 0:
+    if get_db().seller.find({'phoneNumber': phone_number}).count() > 0:
         return True
     return False
 
@@ -18,8 +18,8 @@ def add_new_seller(data):
     :param data: {"password": "asdfghjkl","phoneNumber": "9079327009","Name": "Asdf Asdf","location" : [70.1244, 40.1324],"deliveryUpto" : 15,"bankDetails" : {"upiID" : "asdf@okicici"}}
     :return: boolean
     """
-    rec_id = db.seller.insert_one(data)
-    if db.seller.find({ "_id" : rec_id.inserted_id}).count() > 0: 
+    rec_id = get_db().seller.insert_one(data)
+    if get_db().seller.find({ "_id" : rec_id.inserted_id}).count() > 0: 
         return True
     return False
     
@@ -31,6 +31,6 @@ def seller_exist(phone_number, password):
     :param password: password of the seller
     :return: boolean
     """
-    if db.seller.find({'phoneNumber': phone_number, 'password': password}).count() > 0:
+    if get_db().seller.find({'phoneNumber': phone_number, 'password': password}).count() > 0:
         return True
     return False

@@ -7,7 +7,14 @@ from .config import config_by_name, Config
 
 flask_bcrypt = Bcrypt()
 
-db = MongoClient(Config.MONGODB_URL)['Production']
+mongo = None
+
+
+def get_db():
+    global mongo
+    if mongo is None:
+        mongo = MongoClient(Config.MONGODB_URL)['Production']
+    return mongo
 
 
 def create_app(config_name):

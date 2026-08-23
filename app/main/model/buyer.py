@@ -1,4 +1,4 @@
-from app.main import db
+from app.main import get_db
 from datetime import date , datetime
 
 """
@@ -14,7 +14,7 @@ def buyer_already_exist(phone_number):
     :param phone_number: phone Number of the user
     :return: boolean
     """
-    if db.buyer.find({'phoneNumber': phone_number}).count() > 0:
+    if get_db().buyer.find({'phoneNumber': phone_number}).count() > 0:
         return True
     return False
 
@@ -26,7 +26,7 @@ def buyer_exist(phone_number, password):
     :param password: Password of the user
     :return: boolean
     """
-    if db.buyer.find({'phoneNumber': phone_number, 'password': password}).count() > 0:
+    if get_db().buyer.find({'phoneNumber': phone_number, 'password': password}).count() > 0:
         return True
     return False
 
@@ -41,8 +41,8 @@ def add_new_buyer(data):
     # Adding extra field for storing date/Time in the record
     today = datetime.now()
     data['registeredDateTime'] = today
-    rec_id = db.buyer.insert_one(data)
-    if db.buyer.find({ "_id" : rec_id.inserted_id}).count() > 0: 
+    rec_id = get_db().buyer.insert_one(data)
+    if get_db().buyer.find({ "_id" : rec_id.inserted_id}).count() > 0: 
         return True
     return False
 
@@ -54,8 +54,8 @@ def get_registered_date_time(buyer_id):
     :return: boolean -- if buyer doesn't exist
              string -- containing date/Time
     """
-    if db.buyer.find({'_id': buyer_id }).count() > 0:
-        data = db.buyer.find_one({'_id': buyer_id })
+    if get_db().buyer.find({'_id': buyer_id }).count() > 0:
+        data = get_db().buyer.find_one({'_id': buyer_id })
         date = data['registeredDateTime']
         date = date.strftime("%d/%m/%Y %H:%M:%S")
         return date
