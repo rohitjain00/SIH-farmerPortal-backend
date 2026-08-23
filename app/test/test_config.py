@@ -16,8 +16,12 @@ from flask_testing import TestCase
 
 os.environ['MONGODB_URI'] = 'mongodb+srv://user:pass@example.invalid/db'
 
-from manage import app
+from app import blueprint
+from app.main import create_app
 from app.main.config import basedir
+
+app = create_app('dev')
+app.register_blueprint(blueprint)
 
 
 class TestDevelopmentConfig(TestCase):
