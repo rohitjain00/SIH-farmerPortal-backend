@@ -6,6 +6,11 @@ from werkzeug.utils import cached_property
 
 werkzeug.cached_property = cached_property
 
+import flask
+
+if not hasattr(flask, 'json_available'):
+    flask.json_available = True
+
 from flask import current_app
 from flask_testing import TestCase
 
