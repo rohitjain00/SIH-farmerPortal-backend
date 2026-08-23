@@ -4,20 +4,24 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 """
-    MONGO DB Instruction : 
-    
+    MONGO DB Instruction :
+
     I've while listed all the IPs but just in case connection refused error occurs try this:
 
     To get it working on your system (Does not work on Sophos Client)
     Step 1 : Go to https://cloud.mongodb.com/v2#/account
-    Step 2 : Login via U : "imsleepx@gmail.com", P : "farmer-portal"
+    Step 2 : Login with the Atlas account owner credentials (kept out of source)
     Step 3 : Go to connect and white list your IP address
 """
+
+_MONGODB_URI = os.getenv('MONGODB_URI')
+if _MONGODB_URI is None:
+    raise RuntimeError('MONGODB_URI environment variable is required')
 
 class Config:
     SECRET_KEY = os.getenv('SECRET_KEY', 'my_precious_secret_key')
     DEBUG = False
-    MONGODB_URL = 'mongodb+srv://rohit:rohit@cluster0-ixzb5.mongodb.net/test?retryWrites=true&w=majority'
+    MONGODB_URL = _MONGODB_URI
 
 
 class DevelopmentConfig(Config):

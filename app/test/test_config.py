@@ -4,6 +4,9 @@ import unittest
 from flask import current_app
 from flask_testing import TestCase
 
+MONGODB_URI_DUMMY = 'mongodb+srv://user:pass@example.invalid/db'
+os.environ['MONGODB_URI'] = MONGODB_URI_DUMMY
+
 from manage import app
 from app.main.config import basedir
 
@@ -18,7 +21,7 @@ class TestDevelopmentConfig(TestCase):
         self.assertTrue(app.config['DEBUG'] is True)
         self.assertFalse(current_app is None)
         self.assertTrue(
-            app.config['MONGODB_URL'] == 'mongodb+srv://rohit:rohit@cluster0-ixzb5.mongodb.net/test?retryWrites=true&w=majority'
+            app.config['MONGODB_URL'] == MONGODB_URI_DUMMY
         )
 
 
@@ -31,7 +34,7 @@ class TestTestingConfig(TestCase):
         self.assertFalse(app.config['SECRET_KEY'] is 'my_precious')
         self.assertTrue(app.config['DEBUG'])
         self.assertTrue(
-            app.config['MONGODB_URL'] == 'mongodb+srv://rohit:rohit@cluster0-ixzb5.mongodb.net/test?retryWrites=true&w=majority'
+            app.config['MONGODB_URL'] == MONGODB_URI_DUMMY
         )
 
 
