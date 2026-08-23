@@ -1,6 +1,11 @@
 import os
 import unittest
 
+import werkzeug
+from werkzeug.utils import cached_property
+
+werkzeug.cached_property = cached_property
+
 from flask import current_app
 from flask_testing import TestCase
 
